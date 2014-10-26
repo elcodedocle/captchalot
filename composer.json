@@ -1,6 +1,6 @@
 {
     "name": "elcodedocle/captchalot",
-    "type": "package",
+    "type": "project",
     "description": "Captcha image generator/validator RESTful web service",
     "keywords": ["Captcha", "Visual captcha", "Not a robot", "Turing certified", "Service abuse protection", "Anti spam", "DOS protection"],
     "homepage": "https://github.com/elcodedocle/captchalot",
