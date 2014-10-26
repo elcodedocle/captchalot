@@ -1,0 +1,13 @@
+{
+    "name": "elcodedocle/captchalot",
+    "type": "package",
+    "description": "Captcha image generator/validator RESTful web service",
+    "keywords": ["Captcha", "Visual captcha", "Not a robot", "Turing certified", "Service abuse protection", "Anti spam", "DOS protection"],
+    "homepage": "https://github.com/elcodedocle/captchalot",
+    "license": "MIT Expat",
+    "require": {
+        "php": ">=5.3.0",
+        "elcodedocle/uuid": ">=1.0.0",
+        "elcodedocle/cryptosecureprng": "0.2.0-beta"
+    }
+}

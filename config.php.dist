@@ -1,0 +1,9 @@
+<?php
+$config = array(
+    'dBHost' =>'localhost', 
+    'dBPort' =>'3306', 
+    'dBUser' =>'root', 
+    'dBPassword' =>'', 
+    'dBName' =>'captchalot',
+    'tableName' => 'captchalot'
+);
