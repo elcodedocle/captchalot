@@ -24,7 +24,7 @@ I wanted to implement a simple, easy to use, scalable and independent RESTful ca
  * You can install and deploy captchalot using composer:
  
 ```bash
-composer install elcodedocle/captchalot
+php composer.phar create-project -s "beta" elcodedocle/captchalot
 ```
 
  * You need to edit `config.php.dist` in order to provide basic database connection parameters; then save it as `config.php`. 
