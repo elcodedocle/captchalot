@@ -116,7 +116,11 @@ class captcha {
                 if ($ip!==null && $captcha['ip']!==$ip){
                     return false;
                 }
-                if ($captcha['value']!==hash('sha256',$word)){
+                if ($captcha['value']!==hash(
+                        'sha256',
+                        trim(preg_replace ( '/ +/' , ' ' , $word))
+                    )
+                ){
                     $this->session->removeCaptcha($uuid);
                     return false;
                 }
@@ -184,7 +188,7 @@ class captcha {
     private function persist($uuid,$word){
         $this->session->addCaptcha(
             $uuid,
-            hash('sha256',$word),
+            hash('sha256',trim(preg_replace('/ +/',' ',$word))),
             $this->ip
         );
     }

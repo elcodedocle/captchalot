@@ -39,7 +39,7 @@ var captchalot = {
         var XHR = new XMLHttpRequest(),
             responseJSON,
             parameters,
-            options = typeof (opts) === 'object'?opts:{
+            options = (typeof (opts) === 'object')?opts:{
                 uuid: '',
                 magicword: '',
                 width: 350,
@@ -56,7 +56,8 @@ var captchalot = {
                     !('data' in responseJSON) ||
                     !('validationResult' in responseJSON.data) ||
                         responseJSON.data['validationResult'] !== 'ERROR'
-                        && responseJSON.data['validationResult'] !== 'PENDING'
+                          && responseJSON.data['validationResult'] !== 'PENDING'
+                            && responseJSON.data['validationResult'] !== 'OK'
                 ){
                     console.log(
                         "Cannot understand response from server:\n"

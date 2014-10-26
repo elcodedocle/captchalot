@@ -96,8 +96,8 @@
                         </div>
                         
                         <button type="button" class="btn btn-primary" onclick="captchalot.validate({
-                            uuid:$('#captchalot\\.magicWordUuid').text(),
-                            magicword: $('#captchalot\\.magicWord').text(),
+                            uuid:$('#captchalot\\.magicWordUuid').val(),
+                            magicword: $('#captchalot\\.magicWord').val(),
                             width: 490,
                             height: 70,
                             callbackSuccess:function(ajaxResponse){
@@ -108,10 +108,14 @@
                                 console.log(ajaxResponse);
                                 window.alert('Invalid Captcha');
                                 //set captcha image
-                                $('#captachalot\\.image').attr(
+                                $('#captchalot\\.image').attr(
                                     'src', 
                                     /* 'data:image/png;base64,' + */ 
                                     ajaxResponse.data['base64CaptchaImage']
+                                );
+                                //set captcha uuid
+                                $('#captchalot\\.magicWordUuid').val(
+                                    ajaxResponse.data['captchaId']
                                 );
                                 //window.alert('there!');
                             }
@@ -129,12 +133,16 @@
                                 window.alert('Got a false positive!');
                             }, 
                             callbackError:function(ajaxResponse){
-                                //console.log(ajaxResponse);
+                                console.log(ajaxResponse);
                                 //set captcha image
                                 $('#captchalot\\.image').attr(
                                     'src', 
                                     /* 'data:image/png;base64,' + */ 
                                     ajaxResponse.data['base64CaptchaImage']
+                                );
+                                //set captcha uuid
+                                $('#captchalot\\.magicWordUuid').val(
+                                    ajaxResponse.data['captchaId']
                                 );
                                 //window.alert('here!');
                             }
