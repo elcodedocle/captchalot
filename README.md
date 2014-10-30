@@ -184,7 +184,7 @@ ob_end_flush();
 You can test the code above on the provided web app ([validate.php][2], [captchalot.js][3] and [index.php][4]) you can test 
 by giving those files public execution/access permissions on your web server, then pointing your browser to `index.php`
 
-Here is the demo: https://synapp.info/captchalot
+Here is the demo: https://synapp.info/tools/captchalot
 
 ### Service pitfalls 
 
