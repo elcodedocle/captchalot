@@ -190,6 +190,8 @@ Here is the demo: https://synapp.info/captchalot
 
 The web app was designed in the simplest possible way for embedding on a couple of quite low load services that very seldom require captcha actions. That means it wasn't designed with efficiency or performance in mind, although scalability was considered (if your server starts to choke just move the captcha service to AWS or something like that and start throwing on-demand instances at the problem ;-)).
 
+Also, it doesn't implement accessibility features such as an audio reader for blind or short sighted people (sorry, guys :-( Maybe in future versions...)
+
 ### Acks
 
 Some anonymous internet citizen for posting a blog entry years ago (which I wasn't able to find back) showing how to use imagepng for creating an image and drawing lines and adding text to it
