@@ -143,7 +143,7 @@ class captchaimage {
                 mt_rand($height*0.8, $height*0.9),
                 $line_colors[mt_rand(0, 1)],
                 $this->ttfFileNames[mt_rand(0, 2)],
-                $word{$i}
+                $word[$i]
             );
         }
         
