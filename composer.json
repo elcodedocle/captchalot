@@ -8,6 +8,6 @@
     "require": {
         "php": ">=5.3.0",
         "elcodedocle/uuid": ">=1.0.0",
-        "elcodedocle/cryptosecureprng": "0.2.0-beta"
+        "elcodedocle/cryptosecureprng": "0.2.2"
     }
 }
