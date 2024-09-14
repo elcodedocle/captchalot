@@ -24,7 +24,7 @@ $options = array('options' => array('default' => 60, 'min_range' => 10, 'max_ran
 $height = filter_input(INPUT_POST, 'height', FILTER_VALIDATE_INT, $options);
 
 $captchaImage = new CaptchaImage($width, $height);
-$captcha = new Captcha($session, $_SERVER['REMOTE_ADDR'], $uuidGenerator, $captchaWord, $captchaImage);
+$captcha = new Captcha($session, null, $uuidGenerator, $captchaWord, $captchaImage);
 
 $output = array(
     'data' => array(
@@ -38,7 +38,7 @@ if (
     && isset($_REQUEST['magicword'])
     && $_REQUEST['magicword'] !== ''
 ) {
-    if ($captcha->validate($_REQUEST['uuid'], $_REQUEST['magicword'], $_SERVER['REMOTE_ADDR'])) {
+    if ($captcha->validate($_REQUEST['uuid'], $_REQUEST['magicword'])) {
         $output['data']['validationResult'] = $VALIDATION_RESULT_OK;
     } else {
         $output['data']['validationResult'] = $VALIDATION_RESULT_ERROR;

@@ -62,7 +62,7 @@
                 ?>
             </h2>
             
-            <form>
+            <form action="javascript:$('#captchalot\\.validateButton').click();void(0)">
                 
                 <div class="form-group">
     
@@ -95,7 +95,7 @@
                             
                         </div>
                         
-                        <button type="button" class="btn btn-primary" onclick="captchalot.validate({
+                        <button type="button" id="captchalot.validateButton" class="btn btn-primary" onclick="captchalot.validate({
                             uuid:$('#captchalot\\.magicWordUuid').val(),
                             magicword: $('#captchalot\\.magicWord').val(),
                             width: 490,
