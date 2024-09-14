@@ -1,31 +1,34 @@
 <?php
+
 namespace info\synapp\tools\captcha;
 
-use \Exception;
+use Exception;
+use info\synapp\tools\uuid\UUID;
 
 /**
  * Class captcha
  * @package info\synapp\tools\captcha
  */
-class captcha {
+class Captcha
+{
 
     /**
-     * @var sessioninterface
+     * @var SessionInterface
      */
     private $session;
 
     /**
-     * @var null|\info\synapp\tools\uuid\uuid
+     * @var null|UUID
      */
     private $uuidGenerator;
 
     /**
-     * @var null|\info\synapp\tools\captcha\captchaword
+     * @var null|CaptchaWord
      */
     private $wordGenerator;
 
     /**
-     * @var null|captchaimage
+     * @var null|CaptchaImage
      */
     private $imageGenerator;
 
@@ -36,17 +39,18 @@ class captcha {
 
     /**
      * Echoes the image
-     * 
+     *
      * @return string $uuid The $uuid of the word echoed on the image
-     * @throws \Exception
+     * @throws Exception
      */
-    public function echoImage(){
+    public function echoImage()
+    {
 
         $uuid = $this->uuidGenerator->v4();
         $word = $this->wordGenerator->generateWord();
         $image = $this->imageGenerator->createImage($word);
-        if (isset($image)||$image!==false){
-            if (!imagepng($image)){
+        if (isset($image) || $image !== false) {
+            if (!imagepng($image)) {
                 throw new Exception(
                     'Error generating png from captcha image',
                     500
@@ -61,26 +65,27 @@ class captcha {
                 500
             );
         }
-        
+
     }
 
     /**
-     * Returns an array containing both the base64 encoded png 
+     * Returns an array containing both the base64 encoded png
      * image html src attr value string and the image uuid string
-     * 
+     *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getCaptchaUuidAndImgBase64SrcAttrVal(){
-        
+    public function getCaptchaUuidAndImgBase64SrcAttrVal()
+    {
+
         $uuid = $this->uuidGenerator->v4();
         $word = $this->wordGenerator->generateWord();
         $image = $this->imageGenerator->createImage($word);
-        if (isset($image)&&$image!==false){
+        if (isset($image) && $image !== false) {
             ob_start();
             imagepng($image);
             $base64Image = base64_encode(ob_get_clean());
-            error_log(var_export($base64Image,true));
+            error_log(var_export($base64Image, true));
             $this->persist($uuid, $word);
             return array(
                 'captchaId' => $uuid,
@@ -92,39 +97,39 @@ class captcha {
                 500
             );
         }
-        
+
     }
 
     /**
      * @param string $uuid
      * @param string $word
-     * @param null|bool|string $ip set to false to skip ip validation, null 
+     * @param null|bool|string $ip set to false to skip ip validation, null
      * for value set in construct
      * @return bool
      */
-    public function validate($uuid, $word, $ip = null){
-        if ($ip === null){
+    public function validate($uuid, $word, $ip = null)
+    {
+        if ($ip === null) {
             $ip = $this->ip;
         }
-        if ($ip === false){
+        if ($ip === false) {
             $ip = null;
         }
-        if (isset($uuid) && isset($word)){
-            if (!($captcha=$this->read($uuid))){
+        if (isset($uuid) && isset($word)) {
+            if (!($captcha = $this->read($uuid))) {
                 return false;
             } else {
-                if ($ip!==null && $captcha['ip']!==$ip){
-                    return false;
-                }
-                if ($captcha['value']!==hash(
-                        'sha256',
-                        trim(preg_replace ( '/ +/' , ' ' , $word))
-                    )
-                ){
-                    $this->session->removeCaptcha($uuid);
+                if ($ip !== null && $captcha['ip'] !== $ip) {
                     return false;
                 }
                 $this->session->removeCaptcha($uuid);
+                if ($captcha['value'] !== hash(
+                        'sha256',
+                        trim(preg_replace('/ +/', ' ', $word))
+                    )
+                ) {
+                    return false;
+                }
                 return true;
             }
         } else {
@@ -133,42 +138,43 @@ class captcha {
     }
 
     /**
-     * @param \info\synapp\tools\captcha\sessioninterface $session
+     * @param SessionInterface $session
      * @param string $ip
-     * @param null|\info\synapp\tools\uuid\uuid $uuidGenerator
-     * @param null|\info\synapp\tools\captcha\captchaword $wordGenerator
-     * @param null|\info\synapp\tools\captcha\captchaimage $imageGenerator
-     * @throws \Exception
+     * @param null|UUID $uuidGenerator
+     * @param null|CaptchaWord $wordGenerator
+     * @param null|CaptchaImage $imageGenerator
+     * @throws Exception
      */
-    public function __construct($session, $ip = null, $uuidGenerator = null, $wordGenerator = null, $imageGenerator = null){
+    public function __construct($session, $ip = null, $uuidGenerator = null, $wordGenerator = null, $imageGenerator = null)
+    {
 
-        if (!isset($session)){
+        if (!isset($session)) {
             throw new Exception(
                 'No $session given to captcha constructor.',
                 500
             );
         }
         $this->session = $session;
-        
-        if (is_string($ip)){
+
+        if (is_string($ip)) {
             $this->ip = $ip;
         } else {
             $this->ip = null;
         }
-        
-        if (!isset($uuidGenerator)){
+
+        if (!isset($uuidGenerator)) {
             throw new Exception(
                 'No uuid generator and validator given to captcha constructor.',
                 500
             );
         }
         $this->uuidGenerator = $uuidGenerator;
-        
-        if (isset($wordGenerator)){
+
+        if (isset($wordGenerator)) {
             $this->wordGenerator = $wordGenerator;
         }
-        
-        if (isset($imageGenerator)){
+
+        if (isset($imageGenerator)) {
             $this->imageGenerator = $imageGenerator;
         }
 
@@ -177,7 +183,8 @@ class captcha {
     /**
      * destructor (destroys the image)
      */
-    public function __destruct(){
+    public function __destruct()
+    {
         $this->imageGenerator->destroyImage();
     }
 
@@ -185,10 +192,11 @@ class captcha {
      * @param string $uuid
      * @param $word
      */
-    private function persist($uuid,$word){
+    private function persist($uuid, $word)
+    {
         $this->session->addCaptcha(
             $uuid,
-            hash('sha256',trim(preg_replace('/ +/',' ',$word))),
+            hash('sha256', trim(preg_replace('/ +/', ' ', $word))),
             $this->ip
         );
     }
@@ -199,8 +207,9 @@ class captcha {
      * @param string $uuid
      * @return mixed
      */
-    private function read($uuid){
+    private function read($uuid)
+    {
         return $this->session->getCaptcha($uuid);
     }
-    
+
 }

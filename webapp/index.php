@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-    <!-- 
+    <!--
         @package info\synapp\tools\captcha
         @name captchalot
         @version 0.3.1
@@ -62,7 +62,7 @@
                 ?>
             </h2>
             
-            <form role="form">
+            <form>
                 
                 <div class="form-group">
     
@@ -85,12 +85,12 @@
                         
                         <div class="col-xs-8">
                             
-                            <input 
+                            <input
                                 type="text"
                                 class="form-control"
-                                name="captchalot.magicWord" 
-                                id="captchalot.magicWord" 
-                                placeholder="<?=htmlspecialchars(_("Write here the 2 words you see on the image above"))?>" 
+                                name="captchalot.magicWord"
+                                id="captchalot.magicWord"
+                                placeholder="<?=htmlspecialchars(_("Write here the 2 words you see on the image above"))?>"
                             />
                             
                         </div>
@@ -103,14 +103,14 @@
                             callbackSuccess:function(ajaxResponse){
                                 console.log(ajaxResponse);
                                 window.alert('Captcha OK');
-                            }, 
+                            },
                             callbackError:function(ajaxResponse){
                                 console.log(ajaxResponse);
                                 window.alert('Invalid Captcha');
                                 //set captcha image
                                 $('#captchalot\\.image').attr(
-                                    'src', 
-                                    /* 'data:image/png;base64,' + */ 
+                                    'src',
+                                    /* 'data:image/png;base64,' + */
                                     ajaxResponse.data['base64CaptchaImage']
                                 );
                                 //set captcha uuid
@@ -131,13 +131,13 @@
                             callbackSuccess:function(ajaxResponse){
                                 console.log(ajaxResponse);
                                 window.alert('Got a false positive!');
-                            }, 
+                            },
                             callbackError:function(ajaxResponse){
                                 console.log(ajaxResponse);
                                 //set captcha image
                                 $('#captchalot\\.image').attr(
-                                    'src', 
-                                    /* 'data:image/png;base64,' + */ 
+                                    'src',
+                                    /* 'data:image/png;base64,' + */
                                     ajaxResponse.data['base64CaptchaImage']
                                 );
                                 //set captcha uuid

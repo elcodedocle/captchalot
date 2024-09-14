@@ -5,9 +5,16 @@
     "keywords": ["Captcha", "Visual captcha", "Not a robot", "Turing certified", "Service abuse protection", "Anti spam", "DOS protection"],
     "homepage": "https://github.com/elcodedocle/captchalot",
     "license": "MIT",
+    "autoload": {
+        "classmap": [
+            "src"
+        ]
+    },
     "require": {
         "php": ">=5.3.0",
-        "elcodedocle/uuid": ">=1.0.0",
-        "elcodedocle/cryptosecureprng": "0.2.2"
+        "elcodedocle/uuid": ">=2.0.0",
+        "elcodedocle/cryptosecureprng": "0.2.2",
+        "ext-gd": "*",
+        "ext-pdo": "*"
     }
 }

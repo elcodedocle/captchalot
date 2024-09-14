@@ -3,11 +3,11 @@
  * 
  */
 
-var captchalot = {
+let captchalot = {
     
     'validate' : function(opts){
 
-        var XHR = new XMLHttpRequest(),
+        let XHR = new XMLHttpRequest(),
             responseJSON,
             parameters,
             options = (typeof (opts) === 'object')?opts:{
@@ -50,7 +50,7 @@ var captchalot = {
         });
         
         XHR.addEventListener("error", function(event) {
-            alert('Something went wrong ¯\(º_o)/¯');
+            alert('Something went wrong ¯\\(º_o)/¯');
             console.log(event.target.responseText);
         });
         

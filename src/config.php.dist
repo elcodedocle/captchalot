@@ -1,0 +1,10 @@
+<?php
+$config = array(
+    'dBHost' => '127.0.0.1',
+    'dBPort' => '3306',
+    'dBUser' => 'root',
+    'dBPassword' => '',
+    'dBName' => 'captchalot',
+    'dBDriver' => 'mysql',
+    'tableName' => 'captchalot'
+);

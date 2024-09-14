@@ -1,0 +1,24 @@
+{
+  "name": "elcodedocle/captchalotdemowebapp",
+  "type": "webapp",
+  "description": "Captchalot captcha generator demo web app.",
+  "keywords": ["Captcha", "Visual captcha", "Not a robot", "Turing certified", "Service abuse protection", "Anti spam", "DOS protection"],
+  "homepage": "https://github.com/elcodedocle/captchalot",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../",
+      "options" : {
+        "versions" :
+        { "elcodedocle/captchalot" : "0.1.2@dev" }
+      }
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "elcodedocle/captchalot": "0.1.2@dev",
+    "ext-json": "*",
+    "ext-gettext": "*"
+  }
+}
