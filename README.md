@@ -118,6 +118,7 @@ $VALIDATION_RESULT_OK = 'OK';
 $VALIDATION_RESULT_ERROR = 'ERROR';
 
 $session = new Session(session_id());
+$session->removeExpiredCaptchas();
 $uuidGenerator = new UUID();
 $captchaWord = new CaptchaWord();
 

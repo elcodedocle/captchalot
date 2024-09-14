@@ -52,7 +52,7 @@ class Session implements SessionInterface
             $sessionId = $this->sessionId;
         }
         $stmt = $this->dbh->prepare(
-            'INSERT INTO ' . $this->tableName . ' VALUES (?,?,?,?)'
+            'INSERT INTO ' . $this->tableName . ' (nonce, value, session_id, ip) VALUES (?,?,?,?)'
         );
         return $stmt->execute(array($uuid, $word, $sessionId, $ip));
 
@@ -69,6 +69,20 @@ class Session implements SessionInterface
             'DELETE FROM ' . $this->tableName . ' WHERE nonce = ?'
         );
         return $stmt->execute(array($uuid));
+
+    }
+
+    /**
+     * @param int $intervalInSeconds life span of the captcha in seconds. Older captchas will be removed
+     * @return bool
+     */
+    public function removeExpiredCaptchas($intervalInSeconds = 300)
+    {
+
+        $stmt = $this->dbh->prepare(
+            'DELETE FROM ' . $this->tableName . ' WHERE created_at + INTERVAL ? SECOND < CURRENT_TIMESTAMP'
+        );
+        return $stmt->execute(array($intervalInSeconds));
 
     }
 
